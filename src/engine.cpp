@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #if (defined(_WIN32) || defined(__WIN32__))
 #define mkdir(A, B) mkdir(A)
