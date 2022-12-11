@@ -8,10 +8,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#if (defined(_WIN32) || defined(__WIN32__))
-#define mkdir(A, B) mkdir(A)
-#endif
-
 int createDir(const char *dir) {
 #ifdef __linux__
   return mkdir(dir, 0777); /* Or what parameter you need here ... */
