@@ -16,4 +16,4 @@ Windows: ```.\rotary_gen.exe```
 Linux: ```./rotary_gen```  
 - Import the generated files into the engine simulator  
 - ## License  
-This project is licensed under the MIT License - see the LICENSE file for details.  
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/StanTheAwesomeMan/Beacrox-Rotary-Generator/blob/master/LICENSE) for details.  
