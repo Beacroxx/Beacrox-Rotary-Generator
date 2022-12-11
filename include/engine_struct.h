@@ -1,7 +1,9 @@
 #ifndef ENGINE_STRUCT_H
 #define ENGINE_STRUCT_H
 
-#include "./units.h"
+#include "units.h"
+#include <string>
+#include <vector>
 
 struct Engine {
   int rotors = 2;

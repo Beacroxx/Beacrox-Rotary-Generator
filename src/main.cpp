@@ -1,46 +1,55 @@
-#include <iostream>
-#include <cmath>
-#include <fstream>
-#include <filesystem>
-#include <cctype>
-#include <regex>
-#include <string>
-#include <iomanip>
-#include <algorithm>
-#include <iterator>
-#include <ostream>
-#include <map>
-#include <ctime>
-#include "./functions.cpp"
-#include "./engine.cpp"
 #include "../include/engine_struct.h"
 #include "../include/units.h"
+#include "engine.cpp"
+#include "functions.cpp"
+#include <algorithm>
+#include <cctype>
+#include <cmath>
+#include <ctime>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <ostream>
+#include <regex>
+#include <string>
 
 int main() {
 
-  std::string version = "v1.0";
+  std::string version = "v1.1";
 
   // Set std::cout precision and decimal position
   std::cout << std::fixed << std::setprecision(2) << std::defaultfloat;
   std::cout.setf(std::ios::fixed);
 
   std::time_t t = std::time(nullptr);
-  std::tm* now = std::localtime(&t);
+  std::tm *now = std::localtime(&t);
 
   // Generator Information
   std::cout << "========== Info ==========" << std::endl;
   std::cout << "© Copyright | 2022 | Beacrox#8888" << std::endl;
   std::cout << "Version " << version << std::endl;
-  std::cout << "Idle is Tuned to 9500 RPM with default Dimensions." << std::endl;
-  std::cout << "A default Timing curve is used. You may need to tune it yourself." << std::endl;
-  std::cout << "Default units are in (brackets) and default values are in [square brackets]." << std::endl;
+  std::cout << "Idle is Tuned to 9500 RPM with default Dimensions."
+            << std::endl;
+  std::cout
+      << "A default Timing curve is used. You may need to tune it yourself."
+      << std::endl;
+  std::cout << "Default units are in (brackets) and default values are in "
+               "[square brackets]."
+            << std::endl;
   std::cout << "Leave the input empty to use defaults." << std::endl;
   std::cout << "If no unit specified, the default unit is used." << std::endl;
-  std::cout << "To specify units, separate the value and unit with a space. Ex: '5 cm'." << std::endl;
-  std::cout << "All units available in the Engine Simulator are also available in this Generator." << std::endl;
+  std::cout << "To specify units, separate the value and unit with a space. "
+               "Ex: '5 cm'."
+            << std::endl;
+  std::cout << "All units available in the Engine Simulator are also available "
+               "in this Generator."
+            << std::endl;
   std::cout << "Generator is WIP. Some stuff might break." << std::endl;
   std::cout << std::endl;
-  
+
   // Get inputs
   std::cout << "========== Inputs ==========" << std::endl;
   getIntInput("Simulation Frequency (hz)", engine.simulation_frequency, "hz");
@@ -75,14 +84,23 @@ int main() {
   // Engine information
   std::cout << std::endl;
   std::cout << "========== Engine Info ==========" << std::endl;
-  double engine_volume = engine.displacement / (engine.displacement / units.getUnit["cc"] > 1000 ? units.getUnit["L"] : units.getUnit["cc"]);
-  std::string engine_unit = (engine.displacement / units.getUnit["cc"] > 1000 ? " L" : " cc");
-  std::cout << "Engine Volume: '" << engine_volume << engine_unit << "' | '" << engine.displacement / units.getUnit["cubic_inches"] << " ci'." << std::endl;
-  std::cout << "Maximum theoretical intake CFM: '" << engine.maxCFM << "'." << std::endl;
+  double engine_volume =
+      engine.displacement / (engine.displacement / units.getUnit["cc"] > 1000
+                                 ? units.getUnit["L"]
+                                 : units.getUnit["cc"]);
+  std::string engine_unit =
+      (engine.displacement / units.getUnit["cc"] > 1000 ? " L" : " cc");
+  std::cout << "Engine Volume: '" << engine_volume << engine_unit << "' | '"
+            << engine.displacement / units.getUnit["cubic_inches"] << " ci'."
+            << std::endl;
+  std::cout << "Maximum theoretical intake CFM: '" << engine.maxCFM << "'."
+            << std::endl;
 
   // Warning about dimensions
   if (engine.stroke * 2 > engine.radius) {
-    std::cout << "Warning: if the Stroke is bigger than half of the Radius, the Engine might break or won't work realistically." << std::endl;
+    std::cout << "Warning: if the Stroke is bigger than half of the Radius, "
+                 "the Engine might break or won't work realistically."
+              << std::endl;
   }
 
   generate_engine();
