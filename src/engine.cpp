@@ -10,7 +10,8 @@
 void generate_engine() {
 
   // Generate Folder
-  int result = mkdir("./generated", 0777);
+  const std::string folder = "generated";
+  int result = mkdir(folder.c_str(), 0777);
   if (result != 0) {
     if (errno == EEXIST) {
       std::cout << "Folder exists, Continuing..." << std::endl;
