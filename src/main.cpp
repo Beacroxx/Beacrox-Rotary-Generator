@@ -10,6 +10,7 @@
 #include <iterator>
 #include <ostream>
 #include <map>
+#include <ctime>
 #include "./functions.cpp"
 #include "./engine.cpp"
 #include "../include/engine_struct.h"
@@ -21,15 +22,24 @@ int main() {
   std::cout << std::fixed << std::setprecision(2) << std::defaultfloat;
   std::cout.setf(std::ios::fixed);
 
+  std::time_t t = std::time(nullptr);
+  std::tm* now = std::localtime(&t);
+
   // Generator Information
   std::cout << "========== Info ==========" << std::endl;
+  std::cout << "© Copyright | " 
+            << now->tm_mday << '/' 
+            << (now->tm_mon + 1) << '/' 
+            << (now->tm_year + 1900) 
+            << " | Beacrox#8888" 
+            << std::endl;
   std::cout << "Idle is Tuned to 9500 RPM with default Dimensions." << std::endl;
   std::cout << "A default Timing curve is used. You may need to tune it yourself." << std::endl;
-  std::cout << "Default units.getUnit are in (brackets) and default values are in [square brackets]." << std::endl;
+  std::cout << "Default units are in (brackets) and default values are in [square brackets]." << std::endl;
   std::cout << "Leave the input empty to use defaults." << std::endl;
   std::cout << "If no unit specified, the default unit is used." << std::endl;
-  std::cout << "To specify units.getUnit, separate the value and unit with a space. Ex: '5 cm'." << std::endl;
-  std::cout << "All units.getUnit available in the Engine Simulator are also available in this Generator." << std::endl;
+  std::cout << "To specify units, separate the value and unit with a space. Ex: '5 cm'." << std::endl;
+  std::cout << "All units available in the Engine Simulator are also available in this Generator." << std::endl;
   std::cout << "Generator is WIP. Some stuff might break." << std::endl;
   std::cout << std::endl;
   
