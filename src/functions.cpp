@@ -86,8 +86,7 @@ bool is_valid_string(const std::string& str, const bool canContainSpace) {
 
 // Get integer input
 void getIntInput(std::string prompt, int& inp, std::string defaultUnit) {
-  bool recheck = true;
-  while (recheck) {
+  while (true) {
     std::string input;
     std::cout << prompt << " [" << (int)(inp / units.getUnit[defaultUnit]) << "]: ";
     std::getline(std::cin, input);
@@ -100,7 +99,7 @@ void getIntInput(std::string prompt, int& inp, std::string defaultUnit) {
       auto it = units.getUnit.find(unit);
       if (it != units.getUnit.end()) {
         inp = std::stoi(value) * units.getUnit[unit];
-        recheck = false;
+        break;
       } else {
         std::cerr << "Invalid argument: " << input << std::endl;
       }
@@ -112,8 +111,7 @@ void getIntInput(std::string prompt, int& inp, std::string defaultUnit) {
 
 // Get decimal input
 void getDoubleInput(std::string prompt, double& inp, std::string defaultUnit) {
-  bool recheck = true;
-  while (recheck) {
+  while (true) {
     std::string input;
     std::cout << prompt << " [" << inp / units.getUnit[defaultUnit] << "]: ";
     std::getline(std::cin, input);
@@ -126,7 +124,7 @@ void getDoubleInput(std::string prompt, double& inp, std::string defaultUnit) {
       auto it = units.getUnit.find(unit);
       if (it != units.getUnit.end()) {
         inp = std::stod(value) * units.getUnit[unit];
-        recheck = false;
+        break;
       } else {
         std::cerr << "Invalid argument: " << input << std::endl;
       }
@@ -138,15 +136,14 @@ void getDoubleInput(std::string prompt, double& inp, std::string defaultUnit) {
 
 // Get string input
 void getStringInput(std::string prompt, std::string& inp) {
-  bool recheck = true;
-  while (recheck) {
+  while (true) {
     std::string input;
     std::cout << prompt << " [" << inp << "]: ";
     std::getline(std::cin, input);
     input = (input == "") ? inp : input;
     if (is_valid_string(input, true)) {
       inp = input;
-      recheck = false;
+      break;
     } else {
       std::cout << "Invalid argument: " << input << std::endl;
     }
@@ -164,8 +161,7 @@ void getFiringOrder() {
     }
   }
   std::string firing_order_string = ss.str();
-  bool recheck = true;
-  while (recheck) {
+  while (true) {
     std::string input;
     std::cout << "Firing Order [" << firing_order_string << "]: ";
     std::getline(std::cin, input);
@@ -177,7 +173,7 @@ void getFiringOrder() {
         for (int i = 0; i <= length - 1; ++i) {
           engine.firing_order[i] = std::stod(num_strs[i]);
         }
-        recheck = false;
+        break;
       } else {
         std::cerr << "Invalid argument: " << input << std::endl;
       }
