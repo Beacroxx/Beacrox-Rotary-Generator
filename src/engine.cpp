@@ -7,11 +7,24 @@
 #include <string>
 #include <sys/stat.h>
 
+#if (defined(_WIN32) || defined(__WIN32__))
+#define mkdir(A, B) mkdir(A)
+#endif
+
+int createDir(const char *dir) {
+#ifdef __linux__
+  return mkdir(dir, 0777); /* Or what parameter you need here ... */
+#else
+  return _mkdir(dir);
+#endif
+}
+
 void generate_engine() {
 
   // Generate Folder
   const std::string folder = "generated";
-  int result = mkdir(folder.c_str(), 0777);
+
+  int result = createDir(folder.c_str());
   if (result != 0) {
     if (errno == EEXIST) {
       std::cout << "Folder exists, Continuing..." << std::endl;
