@@ -1,9 +1,16 @@
-#include "../include/units.h"
 #include "../include/engine_struct.h"
+#include "../include/units.h"
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <regex>
+#include <sstream>
+#include <string>
+#include <vector>
 
 // Function to split string into Array using a Delimiter
-std::vector<std::string> split(const std::string& s, char delimiter) {
-    std::vector<std::string> tokens;
+std::vector<std::string> split(const std::string &s, char delimiter) {
+  std::vector<std::string> tokens;
   std::string token;
   std::istringstream token_stream(s);
   while (std::getline(token_stream, token, delimiter)) {
@@ -26,23 +33,31 @@ void initializeArrays() {
 
 // Calculate displacement
 void calculateDisplacement() {
-  double normal_volume = (engine.stroke / units.getUnit["cm"] * 0.5) * engine.radius / units.getUnit["cm"] * engine.depth / units.getUnit["cm"] * engine.rotors;
+  double normal_volume = (engine.stroke / units.getUnit["cm"] * 0.5) *
+                         engine.radius / units.getUnit["cm"] * engine.depth /
+                         units.getUnit["cm"] * engine.rotors;
   double depression_volume = engine.depression_volume * 3 * engine.rotors;
-  engine.displacement = (3 * sqrt(3) * normal_volume + depression_volume) * units.getUnit["cc"];
+  engine.displacement =
+      (3 * sqrt(3) * normal_volume + depression_volume) * units.getUnit["cc"];
 }
 
 // Calculate maximum intake CFM
 void calculateMaxCFM() {
   calculateDisplacement();
   double efficiency = 1.7;
-  engine.maxCFM = ((engine.displacement / units.getUnit["cubic_inches"]) * (engine.redline / units.getUnit["rpm"]) * efficiency) / 3456.0;;
+  engine.maxCFM = ((engine.displacement / units.getUnit["cubic_inches"]) *
+                   (engine.redline / units.getUnit["rpm"]) * efficiency) /
+                  3456.0;
+  ;
 }
 
 // Generate default firing order
 void setDefaultFiringOrder() {
   int length = engine.rotors;
   for (int i = 0; i <= length - 1; i++) {
-    int value = (i <= (length - 1) / 2) ? i * 2 : (i - length / 2) * 2 + (length % 2 == 0 ? 1 : -1);
+    int value = (i <= (length - 1) / 2)
+                    ? i * 2
+                    : (i - length / 2) * 2 + (length % 2 == 0 ? 1 : -1);
     engine.firing_order[i] = value;
   }
 }
@@ -51,7 +66,9 @@ void setDefaultFiringOrder() {
 void setRotorAngles() {
   int length = engine.rotors;
   for (int i = 0; i <= length - 1; i++) {
-    double angle = (60 + engine.rod_journals[i] / units.getUnit["deg"] / 360.0 * 120) * units.getUnit["deg"];
+    double angle =
+        (60 + engine.rod_journals[i] / units.getUnit["deg"] / 360.0 * 120) *
+        units.getUnit["deg"];
     engine.rotor_angles[i] = angle;
   }
 }
@@ -59,8 +76,9 @@ void setRotorAngles() {
 // Generate rod journals
 void setRodJournals() {
   int length = engine.rotors;
-  for (int i = 0; i <= length -1; i++) {
-    double journal = (engine.firing_order[i] * (360.0 / length)) * units.getUnit["deg"];
+  for (int i = 0; i <= length - 1; i++) {
+    double journal =
+        (engine.firing_order[i] * (360.0 / length)) * units.getUnit["deg"];
     engine.rod_journals[i] = journal;
   }
 }
@@ -77,22 +95,25 @@ void setIgnitionTimings() {
 }
 
 // Check for Valid name/node string
-bool is_valid_string(const std::string& str, const bool canContainSpace) {
-    return std::all_of(str.begin(), str.end(), [&](unsigned char c){
-        return std::isalnum(c) || c == '_' || (canContainSpace && c == ' ');
-    });
+bool is_valid_string(const std::string &str, const bool canContainSpace) {
+  return std::all_of(str.begin(), str.end(), [&](unsigned char c) {
+    return std::isalnum(c) || c == '_' || (canContainSpace && c == ' ');
+  });
 }
 
-
 // Get integer input
-void getIntInput(std::string prompt, int& inp, std::string defaultUnit) {
+void getIntInput(std::string prompt, int &inp, std::string defaultUnit) {
   while (true) {
     std::string input;
-    std::cout << prompt << " [" << (int)(inp / units.getUnit[defaultUnit]) << "]: ";
+    std::cout << prompt << " [" << (int)(inp / units.getUnit[defaultUnit])
+              << "]: ";
     std::getline(std::cin, input);
-    input = (input == "") ? std::to_string(inp / units.getUnit[defaultUnit]) + defaultUnit : input;
+    input = (input == "")
+                ? std::to_string(inp / units.getUnit[defaultUnit]) + defaultUnit
+                : input;
     std::stringstream ss(input);
-    std::string value; std::string unit;
+    std::string value;
+    std::string unit;
     try {
       ss >> value >> unit;
       unit = (unit == "") ? defaultUnit : unit;
@@ -103,22 +124,25 @@ void getIntInput(std::string prompt, int& inp, std::string defaultUnit) {
       } else {
         std::cerr << "Invalid argument: " << input << std::endl;
       }
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::invalid_argument &e) {
       std::cout << "Invalid argument: " << input << std::endl;
     }
   }
 }
 
 // Get decimal input
-void getDoubleInput(std::string prompt, double& inp, std::string defaultUnit) {
+void getDoubleInput(std::string prompt, double &inp, std::string defaultUnit) {
   while (true) {
     std::string input;
     std::cout << prompt << " [" << inp / units.getUnit[defaultUnit] << "]: ";
     std::getline(std::cin, input);
-    input = (input == "") ? std::to_string(inp / units.getUnit[defaultUnit]) + defaultUnit : input;
+    input = (input == "")
+                ? std::to_string(inp / units.getUnit[defaultUnit]) + defaultUnit
+                : input;
     std::stringstream ss(input);
     try {
-      std::string value; std::string unit;
+      std::string value;
+      std::string unit;
       ss >> value >> unit;
       unit = (unit == "") ? defaultUnit : unit;
       auto it = units.getUnit.find(unit);
@@ -128,14 +152,14 @@ void getDoubleInput(std::string prompt, double& inp, std::string defaultUnit) {
       } else {
         std::cerr << "Invalid argument: " << input << std::endl;
       }
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::invalid_argument &e) {
       std::cout << "Invalid argument: " << input << std::endl;
     }
   }
 }
 
 // Get string input
-void getStringInput(std::string prompt, std::string& inp) {
+void getStringInput(std::string prompt, std::string &inp) {
   while (true) {
     std::string input;
     std::cout << prompt << " [" << inp << "]: ";
@@ -167,7 +191,8 @@ void getFiringOrder() {
     std::getline(std::cin, input);
     input = (input == "") ? firing_order_string : input;
     try {
-      std::regex pattern("^((\\d+, ){" + std::to_string(length - 1) + "}\\d+|\\d+)$");
+      std::regex pattern("^((\\d+, ){" + std::to_string(length - 1) +
+                         "}\\d+|\\d+)$");
       if (std::regex_match(input, pattern)) {
         std::vector<std::string> num_strs = split(input, ',');
         for (int i = 0; i <= length - 1; ++i) {
@@ -177,7 +202,7 @@ void getFiringOrder() {
       } else {
         std::cerr << "Invalid argument: " << input << std::endl;
       }
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::invalid_argument &e) {
       std::cout << "Invalid argument: " << input << std::endl;
     }
   }
