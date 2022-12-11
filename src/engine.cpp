@@ -18,8 +18,13 @@ int createDir(const char *dir) {
 
 void generate_engine() {
 
+  // Generator status
+  std::cout << "===== Status =====" << std::endl;
+
   // Generate Folder
   const std::string folder = "generated";
+
+  std::cout << "Generating folder './" << folder << "'..." << std::endl;
 
   int result = createDir(folder.c_str());
   if (result != 0) {
@@ -42,8 +47,6 @@ void generate_engine() {
   file_out.setf(std::ios::fixed);
   file_out.precision(2);
 
-  // Generator status
-  std::cout << "===== Status =====" << std::endl;
   std::cout << "Generating '" << filename << "'..." << std::endl;
 
   // The main part of the Generator
