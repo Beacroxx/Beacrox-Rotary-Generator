@@ -1,20 +1,9 @@
 #include "../include/engine_struct.h"
 #include "../include/units.h"
+
 #include "engine.cpp"
 #include "functions.cpp"
-#include <algorithm>
-#include <cctype>
-#include <cmath>
-#include <ctime>
-#include <filesystem>
-#include <fstream>
 #include <iomanip>
-#include <iostream>
-#include <iterator>
-#include <map>
-#include <ostream>
-#include <regex>
-#include <string>
 
 int main() {
 
