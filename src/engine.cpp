@@ -16,7 +16,7 @@ int createDir(const char *dir) {
 #ifdef __linux__
   return mkdir(dir, 0777); /* Or what parameter you need here ... */
 #else
-  return _mkdir(dir);
+  return mkdir(dir);
 #endif
 }
 
