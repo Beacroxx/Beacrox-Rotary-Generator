@@ -19,6 +19,7 @@ int createDir(const char *dir) {
 void generate_engine() {
 
   // Generator status
+  std::cout << std::endl;
   std::cout << "===== Status =====" << std::endl;
 
   // Generate Folder
