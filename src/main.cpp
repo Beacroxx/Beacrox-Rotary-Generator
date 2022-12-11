@@ -18,6 +18,8 @@
 
 int main() {
 
+  std::string version = "v1.0";
+
   // Set std::cout precision and decimal position
   std::cout << std::fixed << std::setprecision(2) << std::defaultfloat;
   std::cout.setf(std::ios::fixed);
@@ -27,12 +29,8 @@ int main() {
 
   // Generator Information
   std::cout << "========== Info ==========" << std::endl;
-  std::cout << "© Copyright | " 
-            << now->tm_mday << '/' 
-            << (now->tm_mon + 1) << '/' 
-            << (now->tm_year + 1900) 
-            << " | Beacrox#8888" 
-            << std::endl;
+  std::cout << "© Copyright | 2022 | Beacrox#8888" << std::endl;
+  std::cout << "Version " << version << std::endl;
   std::cout << "Idle is Tuned to 9500 RPM with default Dimensions." << std::endl;
   std::cout << "A default Timing curve is used. You may need to tune it yourself." << std::endl;
   std::cout << "Default units are in (brackets) and default values are in [square brackets]." << std::endl;
