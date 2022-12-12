@@ -15,8 +15,8 @@ Downloads of the precompiled binaries (Windows & Linux) can be found in the [Rel
 - Navigate to the root folder  
 Example: ```cd C:\Beacrox-Rotary-Generator\```  
 - Compile the code using g++  
-Windows: ```g++ -o rotary_gen.exe .\src\main.cpp```  
-Linux: ```g++ -o rotary_gen ./src/main.cpp```  
+Windows: ```g++ -o rotary_gen.exe .\src\main.cpp``` (you will need MinGW to Run/Build on Windows)   
+Linux: ```g++ -o rotary_gen ./src/main.cpp```   
 - Run the compiled binary to generate the rotary engine files  
 Windows: ```.\rotary_gen.exe```  
 Linux: ```./rotary_gen```  
