@@ -1,6 +1,8 @@
 #include "../include/engine_struct.h"
 #include "../include/units.h"
 
+Engine engine;
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -10,9 +12,9 @@
 
 int createDir(const char *dir) {
 #ifdef __linux__
-  return mkdir(dir, 0777); /* Or what parameter you need here ... */
+  return mkdir(dir, 0777);
 #else
-  return mkdir(dir);
+  return mkdir(dir); /* Windows Fix */
 #endif
 }
 
@@ -283,6 +285,8 @@ void generate_engine() {
   file_out << "    set_vehicle(generic_racecar())" << std::endl;
   file_out << "    set_transmission(racecar_transmission())" << std::endl;
   file_out << "}" << std::endl;
+  file_out << "" << std::endl;
+  file_out << "main()" << std::endl;
 
   std::cout << "Generated '" << filename << "'." << std::endl;
 }

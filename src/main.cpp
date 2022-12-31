@@ -37,6 +37,7 @@ int main() {
                "in this Generator."
             << std::endl;
   std::cout << "Generator is WIP. Some stuff might break." << std::endl;
+  std::cout << "Hint: You can use duplicates in the Firing order (example: 0, 0, 2, 3).";
   std::cout << std::endl;
 
   // Get inputs

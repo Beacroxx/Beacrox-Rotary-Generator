@@ -29,6 +29,6 @@ struct Engine {
   std::vector<double> ignition_timings;
 };
 
-Engine engine;
+extern Engine engine;
 
 #endif // ENGINE_STRUCT_H
