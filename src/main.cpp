@@ -18,7 +18,7 @@ int main() {
 
   // Generator Information
   std::cout << "========== Info ==========" << std::endl;
-  std::cout << "© Copyright | 2022 | Beacrox#8888" << std::endl;
+  std::cout << "© Copyright | 2022 | Beacrox" << std::endl;
   std::cout << "Version " << version << std::endl;
   std::cout << "Idle is Tuned to 9500 RPM with default Dimensions."
             << std::endl;
