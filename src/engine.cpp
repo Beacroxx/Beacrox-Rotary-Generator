@@ -10,14 +10,6 @@ Engine engine;
 #include <sys/stat.h>
 #include <sys/types.h>
 
-int createDir(const char *dir) {
-#ifdef __linux__
-  return mkdir(dir, 0777);
-#else
-  return mkdir(dir); /* Windows Fix */
-#endif
-}
-
 void generate_engine() {
 
   // Generator status
@@ -29,7 +21,7 @@ void generate_engine() {
 
   std::cout << "Generating folder './" << folder << "'..." << std::endl;
 
-  int result = createDir(folder.c_str());
+  int result = mkdir(folder.c_str(), 0777);
   if (result != 0) {
     if (errno == EEXIST) {
       std::cout << "Folder exists, Continuing..." << std::endl;
