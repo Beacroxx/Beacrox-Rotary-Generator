@@ -7,7 +7,11 @@ This repository contains C++ code for generating rotary engines for use in the e
 - To specify units, separate the value and unit with a space. Ex: '5 cm' or '25 cc'.  
 - All units available in the Engine Simulator are also available in this Generator.  
 ## Requirements   
-The engine simulator by Ange Yaghi. (Patreon Release as of right now)  
+- The engine simulator by Ange Yaghi. (Patreon Release only as of right now)  
+- Windows:  
+  - MinGW (Download [here](https://sourceforge.net/projects/mingw/).)  
+- Linux:  
+  - g++
 ## Downloads  
 Downloads of the precompiled binaries (Windows & Linux) can be found in the [Releases](https://github.com/StanTheAwesomeMan/Beacrox-Rotary-Generator/releases).  
 ## How to Compile 
@@ -15,7 +19,7 @@ Downloads of the precompiled binaries (Windows & Linux) can be found in the [Rel
 - Navigate to the root folder  
 Example: ```cd C:\Beacrox-Rotary-Generator\```  
 - Compile the code using g++  
-Windows: ```g++ -o rotary_gen.exe .\src\main.cpp``` (you will need MinGW to Run/Build on Windows)   
+Windows: ```g++ -o rotary_gen.exe .\src\main.cpp```  
 Linux: ```g++ -o rotary_gen ./src/main.cpp```   
 - Run the compiled binary to generate the rotary engine files  
 Windows: ```.\rotary_gen.exe```  
