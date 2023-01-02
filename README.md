@@ -9,7 +9,8 @@ This repository contains C++ code for generating rotary engines for use in the e
 ## Requirements   
 - The engine simulator by Ange Yaghi. (Patreon Release only as of right now)  
 - Windows:  
-  - MinGW (Download [here](https://sourceforge.net/projects/mingw/).)  
+  - MinGW-Base  (Download [here](https://sourceforge.net/projects/mingw/).)  
+  - MinGW-Developer-tools  (^^ Download)
 - Linux:  
   - g++
 ## Downloads  
