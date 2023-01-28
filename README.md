@@ -14,7 +14,7 @@ Downloads of the precompiled binary (Linux) can be found in the [Releases](https
 ## How to Compile 
 - Clone this repository to your local machine  
 - Navigate to the root folder  
-Example: ```cd C:\Beacrox-Rotary-Generator\```  
+Example: ```cd ~/Beacrox-Rotary-Generator/```  
 - Compile the code using g++  
 ```g++ -o rotary_gen ./src/main.cpp```   
 - Run the compiled binary to generate the rotary engine files  
